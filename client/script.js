@@ -15,7 +15,7 @@ function loader(element) {
   loadInterval = setInterval(() => {
     element.textContent += '.';
 
-    if (element.textContent === '....') {
+    if (element.textContext === '....') {
       element.textContent = '';
     }
   }, 300);
@@ -86,7 +86,7 @@ const handleSubmit = async(e) => {
   loader(messageDiv);
 
   //  fetach data from server
-  const response = await fetch('http://localhost:5000', {
+  const response = await fetch('https://temicodex.onrender.com', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json',
   },
