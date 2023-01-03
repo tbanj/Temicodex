@@ -26,3 +26,6 @@ To run the server application
 
 - from the root directory, cd into client directory with `cd server`
 - run `npm i && npm run server`
+
+
+# Author : [Alabi Temitope](https://www.linkedin.com/in/alabitemitope/) ![Linkedln Icon](https://user-images.githubusercontent.com/20041050/209115658-dcfea910-990f-41a2-a417-4e4ff8e7e2a4.png)
