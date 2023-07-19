@@ -1,22 +1,21 @@
-import bot from './assets/bot.svg';
-import user from './assets/user.svg';
+import bot from "./assets/bot.svg";
+import user from "./assets/user.svg";
 
-
-const form = document.querySelector('form');
-const chatContainer = document.querySelector('#chat_container');
+const form = document.querySelector("form");
+const chatContainer = document.querySelector("#chat_container");
 
 let loadInterval;
 
 /* calculating number of points of loader to
 show while waiting for data from server */
 function loader(element) {
-  element.textContent = '';
+  element.textContent = "";
 
   loadInterval = setInterval(() => {
-    element.textContent += '.';
+    element.textContent += ".";
 
-    if (element.textContext === '....') {
-      element.textContent = '';
+    if (element.textContext === "....") {
+      element.textContent = "";
     }
   }, 300);
 }
@@ -31,7 +30,7 @@ function typeText(element, text) {
     } else {
       clearInterval(interval);
     }
-  },20)
+  }, 20);
 }
 
 // generate unique ID for each message div of bot
@@ -43,36 +42,30 @@ function generateUniqueId() {
   const hexadecimalString = randomNumber.toString(16);
 
   return `id-${timestamp}-${hexadecimalString}`;
-
-
 }
 
 function chatStripe(isAt, value, uniqueId) {
-  return (
-    `
-      <div class="wrapper ${isAt && 'ai'}">
+  return `
+      <div class="wrapper ${isAt && "ai"}">
         <div class="chat">
           <div class="profile">
             <img src="${isAt ? bot : user}" 
-            alt="${isAt ? 'bot' : 'user'}"
+            alt="${isAt ? "bot" : "user"}"
             />
           </div>
           <div class="message" id=${uniqueId}>${value}</div>
         </div>
       </div>
-    `
-  )
-  
+    `;
 }
 
-
-const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
 
   const data = new FormData(form);
 
   // user's chatstripe
-  chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
+  chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
   form.reset();
 
   // bot's chatstripe
@@ -86,37 +79,33 @@ const handleSubmit = async(e) => {
   loader(messageDiv);
 
   //  fetach data from server
-  const response = await fetch('https://temicodex.onrender.com', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json',
-  },
+  const response = await fetch("https://temicodex.onrender.com", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      prompt: data.get('prompt'),
-    })
-  })
+      prompt: data.get("prompt"),
+    }),
+  });
 
   clearInterval(loadInterval);
-  messageDiv.innerHTML = '';
+  messageDiv.innerHTML = "";
 
   if (response.ok) {
     const data = await response.json();
     const parsedData = data.bot.trim();
 
     typeText(messageDiv, parsedData);
-    
   } else {
     const err = await response.text();
 
     messageDiv.innerHTML = "Something went wrong";
 
     alert(err);
-
   }
+};
 
-}
-
-form.addEventListener('submit', handleSubmit);
-form.addEventListener('keyup', (e) => {
+form.addEventListener("submit", handleSubmit);
+form.addEventListener("keyup", (e) => {
   if (e.keyCode === 13) {
     handleSubmit(e);
   }

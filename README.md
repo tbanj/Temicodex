@@ -4,8 +4,9 @@
 
 This application makes use of text-davinci model from openai to develop a robust chat system with high accuracy which can be use by leaners to learn any major skill.
 
-Client application is developed with Vite
-Backend application is developed with Node.js
+Client application is developed with Vite.
+
+Backend application is developed with Node.js.
 
 Live demonstrtion of the application is hosted at
 https://temicodex.vercel.app/
