@@ -5,13 +5,6 @@ import cors from "cors";
 import OpenAI from "openai";
 
 dotenv.config();
-
-// const configuration = new Configuration({
-//   apiKey: process.env.OPENAI_API_KEY,
-// });
-
-// const openai = new OpenAIApi(configuration);
-
 const app = express();
 
 /* 
@@ -35,29 +28,6 @@ app.post("/", async (req, res) => {
   try {
     const prompt = { role: "user", content: req.body.prompt };
 
-    // const response = await openai.createCompletion({
-    //   model: "text-davinci-003",
-    //   prompt: `${prompt}`,
-    //   temperature: 0,
-    //   max_tokens: 3000,
-    //   //  Prices are per 1,000 tokens. You can think of tokens as pieces of words,
-    //   // where 1,000 tokens is about 750 words. This paragraph is 35 tokens.
-    //   // max_tokens: 3000
-
-    //   top_p: 1,
-    //   frequency_penalty: 0.5,
-    //   presence_penalty: 0,
-    // });
-    // const response = await openai.completions.create({
-    //   model: "gpt-3.5-turbo-instruct",
-    //   prompt: `${prompt}`,
-    //   temperature: 1,
-    //   max_tokens: 256,
-    //   top_p: 1,
-    //   frequency_penalty: 0,
-    //   presence_penalty: 0,
-    // });
-
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
@@ -72,9 +42,7 @@ app.post("/", async (req, res) => {
       presence_penalty: 0,
     });
 
-    console.warn("response.data", response.choices[0].message.content);
     res.status(200).send({
-      // bot: response.data.choices[0].text,
       bot: response.choices[0].message.content,
     });
   } catch (error) {
