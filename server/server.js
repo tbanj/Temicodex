@@ -38,6 +38,10 @@ app.post("/", async (req, res) => {
       prompt: `${prompt}`,
       temperature: 0,
       max_tokens: 3000,
+      /* Prices are per 1,000 tokens. You can think of tokens as pieces of words, 
+      where 1,000 tokens is about 750 words. This paragraph is 35 tokens. 
+      max_tokens: 3000
+      */
       top_p: 1,
       frequency_penalty: 0.5,
       presence_penalty: 0,
