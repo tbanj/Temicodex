@@ -81,8 +81,9 @@ const handleSubmit = async (e) => {
   //  fetach data from server
   // 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
   // https://temicodex.onrender.com
-  //
-  const response = await fetch("http://localhost:5000/", {
+  // http://localhost:5000/
+
+  const response = await fetch("https://temicodex.onrender.com/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
