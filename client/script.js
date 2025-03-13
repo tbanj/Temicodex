@@ -78,8 +78,6 @@ const handleSubmit = async (e) => {
 
   loader(messageDiv);
 
-  //  fetach data from server
-  // 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
   // https://temicodex.onrender.com
   // http://localhost:5000/
 
